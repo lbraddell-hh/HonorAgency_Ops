@@ -548,8 +548,18 @@ export type SecretBindingTargetType = (typeof SECRET_BINDING_TARGET_TYPES)[numbe
 export const SECRET_ACCESS_OUTCOMES = ["success", "failure"] as const;
 export type SecretAccessOutcome = (typeof SECRET_ACCESS_OUTCOMES)[number];
 
-export const STORAGE_PROVIDERS = ["local_disk", "s3"] as const;
+export const STORAGE_PROVIDERS = ["local_disk", "s3", "gcs"] as const;
 export type StorageProvider = (typeof STORAGE_PROVIDERS)[number];
+
+// Document scope: 'issue' documents are bound to an issue via issue_documents;
+// 'library' documents are standalone company-level artifacts.
+export const DOCUMENT_SCOPES = ["issue", "library"] as const;
+export type DocumentScope = (typeof DOCUMENT_SCOPES)[number];
+
+// Per-document version retention: keep_all preserves full history; current_only
+// prunes non-latest revisions (and their mirror files) on save.
+export const DOCUMENT_RETENTION_POLICIES = ["keep_all", "current_only"] as const;
+export type DocumentRetentionPolicy = (typeof DOCUMENT_RETENTION_POLICIES)[number];
 
 export const BILLING_TYPES = [
   "metered_api",
@@ -1136,6 +1146,10 @@ export const PLUGIN_EVENT_TYPES = [
   "issue.document.created",
   "issue.document.updated",
   "issue.document.deleted",
+  "document.created",
+  "document.updated",
+  "document.deleted",
+  "document.revision.discarded",
   "issue.relations.updated",
   "issue.checked_out",
   "issue.released",

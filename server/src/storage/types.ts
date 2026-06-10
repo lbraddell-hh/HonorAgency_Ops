@@ -57,9 +57,27 @@ export interface PutFileResult {
   originalFilename: string | null;
 }
 
+export interface PutObjectAtKeyResult {
+  provider: StorageProviderId;
+  objectKey: string;
+  contentType: string;
+  byteSize: number;
+  sha256: string;
+}
+
 export interface StorageService {
   provider: StorageProviderId;
   putFile(input: PutFileInput): Promise<PutFileResult>;
+  /**
+   * Write to an explicit, caller-supplied object key (must be company-prefixed).
+   * Overwrites in place — used for stable, human-readable document mirror paths.
+   */
+  putObjectAtKey(
+    companyId: string,
+    objectKey: string,
+    body: Buffer,
+    contentType: string,
+  ): Promise<PutObjectAtKeyResult>;
   getObject(companyId: string, objectKey: string, options?: Pick<GetObjectInput, "range">): Promise<GetObjectResult>;
   headObject(companyId: string, objectKey: string): Promise<HeadObjectResult>;
   deleteObject(companyId: string, objectKey: string): Promise<void>;

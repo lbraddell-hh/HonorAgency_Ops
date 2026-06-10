@@ -15,6 +15,13 @@ export const documentRevisions = pgTable(
     format: text("format").notNull().default("markdown"),
     body: text("body").notNull(),
     changeSummary: text("change_summary"),
+    // Pointer to the mirrored per-revision file (populated only when retentionPolicy = keep_all).
+    mirrorProvider: text("mirror_provider"),
+    mirrorObjectKey: text("mirror_object_key"),
+    mirrorSha256: text("mirror_sha256"),
+    mirrorByteSize: integer("mirror_byte_size"),
+    mirrorContentType: text("mirror_content_type"),
+    mirroredAt: timestamp("mirrored_at", { withTimezone: true }),
     createdByAgentId: uuid("created_by_agent_id").references(() => agents.id, { onDelete: "set null" }),
     createdByUserId: text("created_by_user_id"),
     createdByRunId: uuid("created_by_run_id").references(() => heartbeatRuns.id, { onDelete: "set null" }),

@@ -1,11 +1,17 @@
 import { createHash, randomUUID } from "node:crypto";
 import path from "node:path";
-import type { StorageService, StorageProvider, PutFileInput, PutFileResult } from "./types.js";
+import type {
+  StorageService,
+  StorageProvider,
+  PutFileInput,
+  PutFileResult,
+  PutObjectAtKeyResult,
+} from "./types.js";
 import { badRequest, forbidden, unprocessable } from "../errors.js";
 
 const MAX_SEGMENT_LENGTH = 120;
 
-function sanitizeSegment(value: string): string {
+export function sanitizeSegment(value: string): string {
   const cleaned = value
     .trim()
     .replace(/[^a-zA-Z0-9._-]+/g, "_")
@@ -110,6 +116,33 @@ export function createStorageService(provider: StorageProvider): StorageService 
         byteSize,
         sha256: hashBuffer(input.body),
         originalFilename: input.originalFilename,
+      };
+    },
+
+    async putObjectAtKey(
+      companyId: string,
+      objectKey: string,
+      body: Buffer,
+      contentType: string,
+    ): Promise<PutObjectAtKeyResult> {
+      ensureCompanyPrefix(companyId, objectKey);
+      if (!(body instanceof Buffer)) {
+        throw unprocessable("body must be a Buffer");
+      }
+      const byteSize = body.length;
+      const normalizedContentType = contentType.trim().toLowerCase() || "application/octet-stream";
+      await provider.putObject({
+        objectKey,
+        body,
+        contentType: normalizedContentType,
+        contentLength: byteSize,
+      });
+      return {
+        provider: provider.id,
+        objectKey,
+        contentType: normalizedContentType,
+        byteSize,
+        sha256: hashBuffer(body),
       };
     },
 
