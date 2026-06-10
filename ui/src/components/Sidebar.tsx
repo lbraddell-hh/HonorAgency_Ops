@@ -12,6 +12,7 @@ import {
   Repeat,
   GitBranch,
   Package,
+  FileText,
   Settings,
   FolderOpen,
 } from "lucide-react";
@@ -105,6 +106,7 @@ export function Sidebar() {
           <SidebarNavItem to="/routines" label="Routines" icon={Repeat} />
           <SidebarNavItem to="/goals" label="Goals" icon={Target} />
           <SidebarNavItem to="/artifacts" label="Artifacts" icon={Package} />
+          <SidebarNavItem to="/documents" label="Documents" icon={FileText} />
           {showWorkspacesLink ? (
             <SidebarNavItem to="/workspaces" label="Workspaces" icon={GitBranch} />
           ) : null}

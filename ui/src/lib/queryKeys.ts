@@ -25,6 +25,12 @@ export const queryKeys = {
       ["team-catalog", "catalog", "file", catalogRef, relativePath] as const,
     installed: (companyId: string) => ["team-catalog", "installed", companyId] as const,
   },
+  documents: {
+    list: (companyId: string, path?: string | null) =>
+      ["documents", "list", companyId, path ?? "__all__"] as const,
+    detail: (companyId: string, slug: string) => ["documents", "detail", companyId, slug] as const,
+    revisions: (companyId: string, slug: string) => ["documents", "revisions", companyId, slug] as const,
+  },
   agents: {
     list: (companyId: string) => ["agents", companyId] as const,
     detail: (id: string) => ["agents", "detail", id] as const,
