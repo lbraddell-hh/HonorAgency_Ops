@@ -397,6 +397,7 @@ export type {
   AgentSkillEntry,
   AgentSkillSnapshot,
   AgentSkillSyncRequest,
+  InstanceExecutionMode,
   InstanceExperimentalSettings,
   InstanceGeneralSettings,
   InstanceSettings,
@@ -1414,3 +1415,11 @@ export type {
   EnvironmentProviderCapability,
   EnvironmentSupportStatus,
 } from "./environment-support.js";
+
+export type { AdapterRegistryEntry } from "./types/adapter-registry.js";
+
+export {
+  adapterRegistryEntrySchema,
+  adapterRegistrySchema,
+  type AdapterRegistryEntryParsed,
+} from "./validators/adapter-registry.js";
