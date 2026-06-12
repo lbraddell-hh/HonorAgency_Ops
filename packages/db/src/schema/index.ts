@@ -83,3 +83,15 @@ export { pluginDatabaseNamespaces, pluginMigrations } from "./plugin_database.js
 export { pluginJobs, pluginJobRuns } from "./plugin_jobs.js";
 export { pluginWebhookDeliveries } from "./plugin_webhooks.js";
 export { pluginLogs } from "./plugin_logs.js";
+export { fdEmployeeProfiles, type FdLearnedProfile } from "./fd_employee_profiles.js";
+export { fdAgentProfiles, type FdAgentAvatar, type FdAgentVoice } from "./fd_agent_profiles.js";
+export { fdSessions } from "./fd_sessions.js";
+export { fdMessages, type FdMessageMeta } from "./fd_messages.js";
+export { fdAttachments } from "./fd_attachments.js";
+export {
+  fdProjects,
+  fdProjectMembers,
+  fdSessionProjects,
+  fdProjectTasks,
+  type FdProjectScope,
+} from "./fd_projects.js";
