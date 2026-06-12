@@ -23,6 +23,9 @@ export function createPaperclipMcpServer(config: PaperclipMcpConfig = readConfig
   };
 }
 
+export { PaperclipApiClient, PaperclipApiError } from "./client.js";
+export { readConfigFromEnv, normalizeApiUrl, type PaperclipMcpConfig } from "./config.js";
+
 export async function runServer(config: PaperclipMcpConfig = readConfigFromEnv()) {
   const { server } = createPaperclipMcpServer(config);
   const transport = new StdioServerTransport();

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "front-door-web",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@honorhealth/front-door-web", "dev"],
+      "port": 5273
+    }
+  ]
+}
