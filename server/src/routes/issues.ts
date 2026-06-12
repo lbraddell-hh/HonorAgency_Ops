@@ -63,6 +63,7 @@ import {
 import { trackAgentTaskCompleted } from "@paperclipai/shared/telemetry";
 import { getTelemetryClient } from "../telemetry.js";
 import type { StorageService } from "../storage/types.js";
+import { mirrorCurrent, mirrorRevision, deleteMirror, documentCurrentKey } from "../storage/document-mirror.js";
 import { validate } from "../middleware/validate.js";
 import * as serviceIndex from "../services/index.js";
 import {
@@ -961,6 +962,28 @@ export function issueRoutes(
   const documentsSvc = documentService(db);
   const documentAnnotationsSvc = documentAnnotationService(db);
   const issueReferencesSvc = issueReferenceService(db);
+
+  // Mirror an issue document's current body + latest revision to file storage (best-effort,
+  // post-commit). Issue documents default to keep_all retention. Keys: documents/issue/{issueId}/{key}/...
+  async function mirrorIssueDocument(doc: {
+    id: string;
+    companyId: string;
+    issueId: string;
+    key: string;
+    body: string;
+    latestRevisionId: string | null;
+    latestRevisionNumber: number;
+  }): Promise<void> {
+    const target = { companyId: doc.companyId, scope: "issue" as const, identifier: `${doc.issueId}/${doc.key}` };
+    const current = await mirrorCurrent(target, doc.body);
+    if (current) {
+      await documentsSvc.recordMirror({ documentId: doc.id, pointer: current });
+    }
+    const rev = await mirrorRevision(target, doc.latestRevisionNumber, doc.body);
+    if (rev && doc.latestRevisionId) {
+      await documentsSvc.recordRevisionMirror({ revisionId: doc.latestRevisionId, pointer: rev });
+    }
+  }
   const issueThreadInteractionsSvc = issueThreadInteractionService(db);
   const routinesSvc = routineService(db, {
     pluginWorkerManager: opts.pluginWorkerManager,
@@ -3353,6 +3376,8 @@ export function issueRoutes(
       documentChanged: true,
     });
 
+    await mirrorIssueDocument(doc);
+
     res.status(result.created ? 201 : 200).json(doc);
   });
 
@@ -3578,6 +3603,8 @@ export function issueRoutes(
         documentChanged: true,
       });
 
+      await mirrorIssueDocument(result.document);
+
       res.json(result.document);
     },
   );
@@ -3606,6 +3633,12 @@ export function issueRoutes(
       return;
     }
     await issueReferencesSvc.deleteDocumentSource(removed.id);
+    // Best-effort removal of the mirrored current.md file (revision files may remain;
+    // storage has no list/prune yet — see plan notes).
+    await deleteMirror(
+      issue.companyId,
+      documentCurrentKey({ companyId: issue.companyId, scope: "issue", identifier: `${issue.id}/${removed.key}` }),
+    );
     const referenceSummaryAfter = await issueReferencesSvc.listIssueReferenceSummary(issue.id);
     const referenceDiff = issueReferencesSvc.diffIssueReferenceSummary(referenceSummaryBefore, referenceSummaryAfter);
     const actor = getActorInfo(req);

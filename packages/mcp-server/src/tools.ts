@@ -94,6 +94,25 @@ const upsertDocumentToolSchema = z.object({
   baseRevisionId: z.string().uuid().nullable().optional(),
 });
 
+const documentSlugToolSchema = z
+  .string()
+  .trim()
+  .min(1)
+  .max(96)
+  .regex(/^[a-z0-9][a-z0-9_-]*$/, "Document slug must be lowercase letters, numbers, _ or -");
+
+const upsertLibraryDocumentToolSchema = z.object({
+  companyId: companyIdOptional,
+  slug: documentSlugToolSchema,
+  path: z.string().trim().max(256).nullable().optional(),
+  title: z.string().trim().max(200).nullable().optional(),
+  format: z.enum(["markdown"]).default("markdown"),
+  body: z.string().max(524288),
+  changeSummary: z.string().trim().max(500).nullable().optional(),
+  baseRevisionId: z.string().uuid().nullable().optional(),
+  retentionPolicy: z.enum(["keep_all", "current_only"]).optional(),
+});
+
 const createIssueToolSchema = z.object({
   companyId: companyIdOptional,
 }).merge(createIssueInputSchema);
@@ -563,6 +582,61 @@ export function createToolDefinitions(client: PaperclipApiClient): ToolDefinitio
         client.requestJson(
           "POST",
           `/issues/${encodeURIComponent(issueId)}/documents/${encodeURIComponent(key)}/revisions/${encodeURIComponent(revisionId)}/restore`,
+          { body: {} },
+        ),
+    ),
+    makeTool(
+      "paperclipListLibraryDocuments",
+      "List standalone (company-level) library documents, optionally filtered by folder path",
+      z.object({ companyId: companyIdOptional, path: z.string().trim().max(256).optional() }),
+      async ({ companyId, path }) => {
+        const qs = path ? `?path=${encodeURIComponent(path)}` : "";
+        return client.requestJson("GET", `/companies/${client.resolveCompanyId(companyId)}/documents${qs}`);
+      },
+    ),
+    makeTool(
+      "paperclipGetLibraryDocument",
+      "Get one standalone (library) document by slug",
+      z.object({ companyId: companyIdOptional, slug: documentSlugToolSchema }),
+      async ({ companyId, slug }) =>
+        client.requestJson(
+          "GET",
+          `/companies/${client.resolveCompanyId(companyId)}/documents/${encodeURIComponent(slug)}`,
+        ),
+    ),
+    makeTool(
+      "paperclipListLibraryDocumentRevisions",
+      "List revisions for a standalone (library) document",
+      z.object({ companyId: companyIdOptional, slug: documentSlugToolSchema }),
+      async ({ companyId, slug }) =>
+        client.requestJson(
+          "GET",
+          `/companies/${client.resolveCompanyId(companyId)}/documents/${encodeURIComponent(slug)}/revisions`,
+        ),
+    ),
+    makeTool(
+      "paperclipUpsertLibraryDocument",
+      "Create or update a standalone (library) document. Content is mirrored to file storage automatically.",
+      upsertLibraryDocumentToolSchema,
+      async ({ companyId, slug, ...body }) =>
+        client.requestJson(
+          "PUT",
+          `/companies/${client.resolveCompanyId(companyId)}/documents/${encodeURIComponent(slug)}`,
+          { body: { ...body, slug } },
+        ),
+    ),
+    makeTool(
+      "paperclipRestoreLibraryDocumentRevision",
+      "Restore a prior revision of a standalone (library) document",
+      z.object({
+        companyId: companyIdOptional,
+        slug: documentSlugToolSchema,
+        revisionId: z.string().uuid(),
+      }),
+      async ({ companyId, slug, revisionId }) =>
+        client.requestJson(
+          "POST",
+          `/companies/${client.resolveCompanyId(companyId)}/documents/${encodeURIComponent(slug)}/revisions/${encodeURIComponent(revisionId)}/restore`,
           { body: {} },
         ),
     ),

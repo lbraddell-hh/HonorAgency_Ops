@@ -74,6 +74,14 @@ export const storageS3ConfigSchema = z.object({
   forcePathStyle: z.boolean().default(false),
 });
 
+// GCP-readiness placeholder. The native GCS provider is a later drop-in; until then
+// GCS is reachable via the s3 provider pointed at storage.googleapis.com. Reserving
+// this config shape keeps config files forward-compatible.
+export const storageGcsConfigSchema = z.object({
+  bucket: z.string().min(1).default("paperclip"),
+  prefix: z.string().default(""),
+});
+
 export const storageConfigSchema = z.object({
   provider: z.enum(STORAGE_PROVIDERS).default("local_disk"),
   localDisk: storageLocalDiskConfigSchema.default({
@@ -84,6 +92,10 @@ export const storageConfigSchema = z.object({
     region: "us-east-1",
     prefix: "",
     forcePathStyle: false,
+  }),
+  gcs: storageGcsConfigSchema.default({
+    bucket: "paperclip",
+    prefix: "",
   }),
 });
 
@@ -191,6 +203,7 @@ export type ServerConfig = z.infer<typeof serverConfigSchema>;
 export type StorageConfig = z.infer<typeof storageConfigSchema>;
 export type StorageLocalDiskConfig = z.infer<typeof storageLocalDiskConfigSchema>;
 export type StorageS3Config = z.infer<typeof storageS3ConfigSchema>;
+export type StorageGcsConfig = z.infer<typeof storageGcsConfigSchema>;
 export type SecretsConfig = z.infer<typeof secretsConfigSchema>;
 export type SecretsLocalEncryptedConfig = z.infer<typeof secretsLocalEncryptedConfigSchema>;
 export type AuthConfig = z.infer<typeof authConfigSchema>;

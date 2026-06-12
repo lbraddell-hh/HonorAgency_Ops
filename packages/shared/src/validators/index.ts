@@ -298,6 +298,19 @@ export {
 } from "./issue.js";
 
 export {
+  documentSlugSchema,
+  documentPathSchema,
+  documentRetentionPolicySchema,
+  upsertLibraryDocumentSchema,
+  setDocumentRetentionPolicySchema,
+  restoreDocumentRevisionSchema,
+  type DocumentRetentionPolicyInput,
+  type UpsertLibraryDocument,
+  type SetDocumentRetentionPolicy,
+  type RestoreDocumentRevision,
+} from "./document.js";
+
+export {
   COMPANY_SEARCH_DEFAULT_LIMIT,
   COMPANY_SEARCH_MAX_LIMIT,
   COMPANY_SEARCH_MAX_OFFSET,
