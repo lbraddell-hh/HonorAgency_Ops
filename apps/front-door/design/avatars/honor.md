@@ -1,6 +1,6 @@
-# Sol — Agency CEO & Chief Navigator
+# Honor — Agency CEO & Chief Navigator
 
-**The most important character in the cast.** Sol is the first face every
+**The most important character in the cast.** Honor is the first face every
 HonorHealth employee meets and the relationship-owner for all of them.
 
 - **Concept**: a warm desk lantern / lighthouse-beacon character — the light
@@ -12,12 +12,12 @@ HonorHealth employee meets and the relationship-owner for all of them.
   is the core brightening and rising, never a drawn mouth.
 - **Signature motif** (placeholder continuity): the rising-sun beacon — gold
   disc with three rays. Keep the three rays readable in every pose; they are
-  Sol's crown.
+  Honor's crown.
 - **Personality on screen**: unhurried, present, quietly delighted to see you.
-  Sol never startles; transitions are slow eases. Sol gestures *outward* when
-  introducing specialists (the handing-off pose is Sol's hero pose).
+  Honor never startles; transitions are slow eases. Honor gestures *outward* when
+  introducing specialists (the handing-off pose is Honor's hero pose).
 - **Voice pairing**: medium rate (1.0), medium pitch (1.0) — grounded, warm.
-- **Color discipline**: Sol is the only character allowed to wear gold; on Sol,
+- **Color discipline**: Honor is the only character allowed to wear gold; on Honor,
   purple+gold = the brand itself. Cream backgrounds only.
-- **Avoid**: crowns, ties, briefcases, "boss" props of any kind. Sol's
+- **Avoid**: crowns, ties, briefcases, "boss" props of any kind. Honor's
   authority is light, not insignia.

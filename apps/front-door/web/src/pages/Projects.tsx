@@ -180,14 +180,14 @@ export function Projects() {
       <p className="text-sm font-semibold uppercase tracking-[0.18em] text-plum">Job reqs</p>
       <h1 className="mt-2 font-editorial text-3xl text-ink sm:text-4xl">Work the agency is on</h1>
       <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-ink-soft">
-        Every job req Sol has opened for you — scoped, resourced, and shareable with colleagues.
+        Every job req Honor has opened for you — scoped, resourced, and shareable with colleagues.
         Start a chat to open a new one.
       </p>
 
       <div className="mt-8 space-y-4">
         {projects.length === 0 && (
           <p className="text-sm text-ink-soft">
-            No job reqs yet — tell Sol what you need and he'll open one.
+            No job reqs yet — tell Honor what you need and he'll open one.
           </p>
         )}
         {projects.map((p) => (

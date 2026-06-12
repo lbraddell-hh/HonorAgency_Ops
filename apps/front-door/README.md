@@ -1,7 +1,7 @@
 # HonorHealth Front Door
 
 A standalone chat gateway where HonorHealth employees engage the digital
-agency: the CEO agent (Sol) runs intake and welcome, delegates to specialists
+agency: the CEO agent (Honor) runs intake and welcome, delegates to specialists
 with visible handoffs, learns each employee across sessions, and exposes the
 same flows as REST + a real MCP server for Copilot agents.
 
@@ -15,7 +15,7 @@ pnpm fd:server   # Express API + MCP on http://localhost:4123
 pnpm fd:web      # Vite web app on http://localhost:5273
 ```
 
-Demo flows: intake → chat with Sol → ask for data/ops/comms help to see a
+Demo flows: intake → chat with Honor → ask for data/ops/comms help to see a
 specialist handoff → "End session" → My profile shows what the agency learned →
 the next session's welcome references it. The mic button is push-to-talk
 (Web Speech API); the waveform toggle speaks replies in each agent's voice.

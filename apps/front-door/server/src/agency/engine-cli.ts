@@ -332,5 +332,5 @@ export async function ceoWelcomeCli(ceo: AgentProfile, profile: EmployeeProfile)
       break;
     }
   }
-  return welcome || `Welcome, ${profile.displayName}. I'm Sol — tell me what you need and I'll bring the right talent.`;
+  return welcome || `Welcome, ${profile.displayName}. I'm Honor — tell me what you need and I'll bring the right talent.`;
 }

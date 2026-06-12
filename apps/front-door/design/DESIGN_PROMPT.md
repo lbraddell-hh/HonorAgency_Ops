@@ -44,7 +44,7 @@ geometric motif (see `design/avatars/` for the full art direction).
 
 | Agent | Role | Motif | Color | Personality |
 |---|---|---|---|---|
-| **Sol** (CEO — most important) | Agency CEO & Chief Navigator | Beacon / rising sun | Purple + gold | Warm, unhurried, quietly confident; owns every relationship |
+| **Honor** (CEO — most important) | Agency CEO & Chief Navigator | Beacon / rising sun | Purple + gold | Warm, unhurried, quietly confident; owns every relationship |
 | Mara | Data & Insights Analyst | Ascending bars | Sky blue | Precise, curious, fast; always lands the "so what" |
 | Otto | Operations Coordinator | Orbiting nodes | Sage green | Calm, methodical, reliable; never drops a task |
 | Remy | Communications Specialist | Voice rings | Coral | Upbeat, empathetic, sharp with language |
@@ -77,7 +77,7 @@ and the agents can actually read shared files when reasoning about the work.
    title, department). Returning users get "Continue as …" instead of the form.
 2. **Chat** (`/chat/:id`) — familiar thread layout. Agent messages carry avatar
    + name label; user messages right-aligned in purple. When the CEO brings in
-   a specialist, render a **handoff card** (both avatars, "Sol is bringing in
+   a specialist, render a **handoff card** (both avatars, "Honor is bringing in
    Remy, Communications Specialist — reason…"); hand-backs mirror it. Delegated
    work shows a gold **task chip** with the tracker reference. When an agent
    asks a question with a small set of natural answers, render **quick-reply

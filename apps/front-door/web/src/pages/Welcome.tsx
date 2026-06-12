@@ -46,7 +46,7 @@ export function Welcome() {
           <Avatar avatar={ceo?.avatar} size="xl" speaking={busy} />
         </div>
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-plum">
-          {ceo?.displayName ?? "Sol"} · {ceo?.role ?? "Agency CEO"}
+          {ceo?.displayName ?? "Honor"} · {ceo?.role ?? "Agency CEO"}
         </p>
         <h1 className="mt-3 font-editorial text-4xl leading-tight text-ink sm:text-[44px]">
           I'm the front door to your digital agency.
@@ -105,7 +105,7 @@ export function Welcome() {
               disabled={busy}
               className="mt-2 w-full rounded-full bg-plum px-6 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-plum-deep disabled:opacity-50"
             >
-              {busy ? "Sol is preparing your welcome…" : "Meet the agency"}
+              {busy ? "Honor is preparing your welcome…" : "Meet the agency"}
             </button>
           </form>
         )}

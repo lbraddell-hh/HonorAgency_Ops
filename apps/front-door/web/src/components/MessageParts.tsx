@@ -73,7 +73,7 @@ export function HandoffCard({
         <div className="font-semibold text-plum">
           {handback
             ? `${fromAgent?.displayName ?? "Specialist"} hands back to ${toAgent?.displayName ?? "the CEO"}`
-            : `${fromAgent?.displayName ?? "Sol"} is bringing in ${toAgent?.displayName ?? "a specialist"}${toAgent ? `, ${toAgent.role}` : ""}`}
+            : `${fromAgent?.displayName ?? "Honor"} is bringing in ${toAgent?.displayName ?? "a specialist"}${toAgent ? `, ${toAgent.role}` : ""}`}
         </div>
         <div className="text-ink-soft">{reason}</div>
       </div>

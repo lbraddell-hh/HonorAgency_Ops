@@ -44,5 +44,5 @@ trustworthy in a healthcare setting.
 - The UI's `Avatar` component already renders squircle + speaking ring;
   character art replaces only the inner motif layer — silhouette, color, and
   ring behavior carry over unchanged.
-- Per-agent specs: [sol.md](./sol.md), [mara.md](./mara.md),
+- Per-agent specs: [honor.md](./honor.md), [mara.md](./mara.md),
   [otto.md](./otto.md), [remy.md](./remy.md).

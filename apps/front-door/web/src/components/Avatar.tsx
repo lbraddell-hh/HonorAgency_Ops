@@ -9,7 +9,7 @@ const SIZES = { sm: 32, md: 44, lg: 72, xl: 112 } as const;
 
 function Motif({ motif, accent }: { motif: string; accent: string }) {
   switch (motif) {
-    case "beacon": // Sol — a rising sun/beacon arc
+    case "beacon": // Honor — a rising sun/beacon arc
       return (
         <g>
           <circle cx="50" cy="58" r="16" fill={accent} />
