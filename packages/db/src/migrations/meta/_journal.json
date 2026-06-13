@@ -715,6 +715,13 @@
       "when": 1780534500000,
       "tag": "0101_front_door_projects",
       "breakpoints": true
+    },
+    {
+      "idx": 102,
+      "version": "7",
+      "when": 1780534600000,
+      "tag": "0102_attachment_max_bytes_50mb",
+      "breakpoints": true
     }
   ]
 }
