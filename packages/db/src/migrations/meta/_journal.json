@@ -715,6 +715,27 @@
       "when": 1781490000000,
       "tag": "0101_plugin_company_id_tenant_isolation",
       "breakpoints": true
+    },
+    {
+      "idx": 102,
+      "version": "7",
+      "when": 1781490100000,
+      "tag": "0102_document_file_mirroring",
+      "breakpoints": true
+    },
+    {
+      "idx": 103,
+      "version": "7",
+      "when": 1781490200000,
+      "tag": "0103_front_door",
+      "breakpoints": true
+    },
+    {
+      "idx": 104,
+      "version": "7",
+      "when": 1781490300000,
+      "tag": "0104_front_door_projects",
+      "breakpoints": true
     }
   ]
 }
